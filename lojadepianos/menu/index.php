@@ -18,6 +18,9 @@
             <li class="nav-item">
             <a class="nav-link" href="../categorias/index.php">Categorias</a>
             </li>
+            <li class="nav-item">
+            <a class="nav-link" href="../vendas/index.php">Vendas</a>
+            </li>
         </ul>
         </div>
     </nav>
