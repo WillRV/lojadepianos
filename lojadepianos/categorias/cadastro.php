@@ -20,8 +20,8 @@
         <h1>Cadastrar categoria </h1>
         <form action="insert.php" method="post">
             <div class="form-group">
-            <p>Numero da Categoria </p><input type="text" name="nome">
-            <p>Descição </p><input type="text" name="nome">
+            <p>Numero da Categoria </p><input type="text" name="num">
+            <p>Descição </p><input type="text" name="desc">
             <br> <br>
             
             <input type="reset" value="Limpar" class="btn btn-primary">
