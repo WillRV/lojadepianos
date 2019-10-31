@@ -30,6 +30,9 @@
         <li class="nav-item">
           <a class="nav-link" href="produtos_estoque/index.php">Estoque de Produtos</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="categorias/index.php">Categorias</a>
+        </li>
       </ul>
     </div>
   </nav>
