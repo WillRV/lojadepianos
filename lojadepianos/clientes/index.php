@@ -26,7 +26,7 @@
     <p align="center"> 
         <a href="cadastro.php">Cadastrar novo cliente</a> 
     </p>
-    <table border=1 class="table table-dark">
+    <table border=1 class="table">
         <tr>
             <th>Nome</th>
             <th>Cpf</th>
