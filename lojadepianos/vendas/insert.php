@@ -1,23 +1,25 @@
 <?php
     require '../conecta.php';
 
-    $nome = $_POST['nome'];
+    $vendedor = $_POST['vendedor'];
+    $cliente = $_POST['cliente'];
+    $data = $_POST['data'];
+
     $situacao = isset($_GET['editar']);
-    $codigo = $_POST['id'];
 
     echo $situacao . "<br>";
     echo $codigo;
 
     //edito
-    if($situacao == "1"){
-        $sql = "UPDATE vendedor
+    /*if($situacao == "1"){
+        $sql = "UPDATE vendas
                 SET vend_nome = '$nome' WHERE vend_id = '$codigo';
                 ";
-    }else{ //Insiro
-        $sql = "INSERT INTO vendedor (vend_nome)
-        VALUES ('$nome');
+    }else{ //Insiro       */
+        $sql = "INSERT INTO vendas (ven_data, vendedor_vend_id, clientes_cli_id)
+        VALUES ('$data', '$vendedor', '$cliente');
         ";
-    }
+    //}
     mysqli_query($link, $sql);
 
     header("location: index.php");

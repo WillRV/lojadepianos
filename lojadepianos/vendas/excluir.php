@@ -3,7 +3,7 @@
 
     $codigo = $_GET['codigo'];
     
-    $sql = " DELETE from vendedor where vend_id = $codigo";
+    $sql = " DELETE from vendas where ven_id = '$codigo' ";
 
     mysqli_query($link, $sql);
 

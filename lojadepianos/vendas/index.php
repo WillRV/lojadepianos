@@ -4,7 +4,11 @@
     $sql = "SELECT * FROM vendas";
 
     $consulta = mysqli_query($link, $sql) or die ("Falha ao consultar vendas");
-
+    /*$nome_cliente = mysqli_query($link, "SELECT cli_nome from clientes where cli_id = '1'");
+    $sql_nomeCliente = "SELECT cli_nome from clientes where cli_id = '1'";
+    $sql_nomeVendedor = "SELECT vend_nome from vendedor where vend_id = '2'";
+    $nome_vendedor = mysqli_query($link, "SELECT vend_nome from vendedor where vend_id = '2'");
+    <td><?php echo $nome_cliente = mysqli_fetch_array(mysqli_query($link, "SELECT cli_nome from clientes where cli_id = '$dados['vendedor_vend_id']'")); //echo $dados["vendedor_vend_id"]; ?></td>*/
     include "../menu/index.php";
 ?>
 
@@ -32,20 +36,22 @@
         <tr>
             <th>Id da venda</th>
             <th>Data</th>
-            <th>Vendedor</th>
-            <th>Cliente</th>
+            <th>ID do Vendedor</th>
+            <th>ID do Cliente</th>
+            <th>Ação</th>
         </tr>
         <?php while($dados = mysqli_fetch_array($consulta)){  ?>
+
         <tr>
             <td><?php echo $dados["ven_id"]; ?></td>
             <td><?php echo $dados["ven_data"]; ?></td>
-            <td><?php echo $dados["vendedor_vend_id"]; ?></td>
+            <td><?php echo $dados['vendedor_vend_id'] ?></td>
             <td><?php echo $dados["clientes_cli_id"]; ?></td>
             <td>
-                <a href="editar.php?codigo=<?php echo $dados['vend_id']?>">
+                <a href="editar.php?codigo=<?php echo $dados['ven_id']?>">
                     <button class="fa fa-pencil"></button>
                 </a>
-                <a href="excluir.php?codigo=<?php echo $dados ['vend_id']?>"> 
+                <a href="excluir.php?codigo=<?php echo $dados ['ven_id']?>"> 
                     <button class="fa fa-trash-o"></button>
                 </a>
             </td>
