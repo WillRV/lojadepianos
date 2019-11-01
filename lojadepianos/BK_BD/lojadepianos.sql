@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 17-Out-2019 às 20:29
--- Versão do servidor: 5.7.25-log
--- versão do PHP: 7.3.2
+-- Tempo de geração: 01-Nov-2019 às 22:41
+-- Versão do servidor: 10.4.6-MariaDB
+-- versão do PHP: 7.1.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `lojadepianos`
+-- Banco de dados: `lojadepianos`
 --
 
 -- --------------------------------------------------------
@@ -30,19 +30,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categorias` (
   `cat_id` int(11) NOT NULL,
-  `cat_desc` text NOT NULL
+  `cat_desc` text NOT NULL,
+  `ativo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `categorias`
 --
 
-INSERT INTO `categorias` (`cat_id`, `cat_desc`) VALUES
-(1, 'Piano de Cauda Inteira'),
-(2, 'Piano 2/4 Cauda'),
-(3, 'Piano 1/4 Cauda'),
-(4, 'Piano Vertical'),
-(5, 'Piano Digital');
+INSERT INTO `categorias` (`cat_id`, `cat_desc`, `ativo`) VALUES
+(1, 'Piano de Cauda Inteira', 1),
+(2, 'Piano 2/4 Cauda', 1),
+(3, 'Piano 1/4 Cauda', 1),
+(4, 'Piano Vertical', 1),
+(5, 'Piano Digital', 1);
 
 -- --------------------------------------------------------
 
@@ -54,7 +55,7 @@ CREATE TABLE `clientes` (
   `cli_id` int(11) NOT NULL,
   `cli_nome` varchar(50) NOT NULL,
   `cli_cpf` varchar(20) DEFAULT NULL,
-  `cli_desc` text,
+  `cli_desc` text DEFAULT NULL,
   `cli_aniv` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -110,10 +111,18 @@ INSERT INTO `produto_estoque` (`prod_id`, `prod_nome`, `prod_valor`, `categorias
 
 CREATE TABLE `vendas` (
   `ven_id` int(11) NOT NULL,
-  `ven_data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ven_data` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `vendedor_vend_id` int(11) NOT NULL,
   `clientes_cli_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `vendas`
+--
+
+INSERT INTO `vendas` (`ven_id`, `ven_data`, `vendedor_vend_id`, `clientes_cli_id`) VALUES
+(3, '2019-11-01 21:32:00', 1, 2),
+(5, '2019-11-01 21:33:00', 2, 6);
 
 -- --------------------------------------------------------
 
@@ -150,30 +159,30 @@ INSERT INTO `vendedor` (`vend_id`, `vend_nome`) VALUES
 (6, 'Batista');
 
 --
--- Indexes for dumped tables
+-- Índices para tabelas despejadas
 --
 
 --
--- Indexes for table `categorias`
+-- Índices para tabela `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`cat_id`);
 
 --
--- Indexes for table `clientes`
+-- Índices para tabela `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`cli_id`);
 
 --
--- Indexes for table `produto_estoque`
+-- Índices para tabela `produto_estoque`
 --
 ALTER TABLE `produto_estoque`
   ADD PRIMARY KEY (`prod_id`),
   ADD KEY `categorias_id` (`categorias_id`);
 
 --
--- Indexes for table `vendas`
+-- Índices para tabela `vendas`
 --
 ALTER TABLE `vendas`
   ADD PRIMARY KEY (`ven_id`),
@@ -181,54 +190,54 @@ ALTER TABLE `vendas`
   ADD KEY `clientes_cli_id` (`clientes_cli_id`);
 
 --
--- Indexes for table `vendas_has_produto_estoque`
+-- Índices para tabela `vendas_has_produto_estoque`
 --
 ALTER TABLE `vendas_has_produto_estoque`
   ADD KEY `vendas_ven_id` (`vendas_ven_id`),
   ADD KEY `produto_estoque_prod_id` (`produto_estoque_prod_id`);
 
 --
--- Indexes for table `vendedor`
+-- Índices para tabela `vendedor`
 --
 ALTER TABLE `vendedor`
   ADD PRIMARY KEY (`vend_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT for table `categorias`
+-- AUTO_INCREMENT de tabela `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `clientes`
+-- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
   MODIFY `cli_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `produto_estoque`
+-- AUTO_INCREMENT de tabela `produto_estoque`
 --
 ALTER TABLE `produto_estoque`
   MODIFY `prod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `vendas`
+-- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `ven_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ven_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `vendedor`
+-- AUTO_INCREMENT de tabela `vendedor`
 --
 ALTER TABLE `vendedor`
-  MODIFY `vend_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `vend_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Constraints for dumped tables
+-- Restrições para despejos de tabelas
 --
 
 --
