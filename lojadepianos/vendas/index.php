@@ -1,7 +1,9 @@
 <?php
     require "../conecta.php";
 
-    $sql = "SELECT * FROM vendas";
+    $sql = "SELECT vendas.ven_id, vendas.ven_data, vendedor.vend_nome, clientes.cli_nome, vendas.vendedor_vend_id, vendas.clientes_cli_id from vendas
+    join vendedor on vendas.vendedor_vend_id = vendedor.vend_id 
+    join clientes on vendas.clientes_cli_id = clientes.cli_id;";
 
     $consulta = mysqli_query($link, $sql) or die ("Falha ao consultar vendas");
     /*$nome_cliente = mysqli_query($link, "SELECT cli_nome from clientes where cli_id = '1'");
@@ -36,6 +38,8 @@
         <tr>
             <th>Id da venda</th>
             <th>Data</th>
+            <th>Vendedor</th>
+            <th>Cliente</th>
             <th>ID do Vendedor</th>
             <th>ID do Cliente</th>
             <th>Ação</th>
@@ -45,7 +49,9 @@
         <tr>
             <td><?php echo $dados["ven_id"]; ?></td>
             <td><?php echo $dados["ven_data"]; ?></td>
-            <td><?php echo $dados['vendedor_vend_id'] ?></td>
+            <td><?php echo $dados['vend_nome'] ?></td>
+            <td><?php echo $dados["cli_nome"]; ?></td>
+            <td><?php echo $dados["vendedor_vend_id"]; ?></td>
             <td><?php echo $dados["clientes_cli_id"]; ?></td>
             <td>
                 <a href="editar.php?codigo=<?php echo $dados['ven_id']?>">
